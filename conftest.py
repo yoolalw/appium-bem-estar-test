@@ -3,7 +3,7 @@ from appium.options.android import UiAutomator2Options
 from appium import webdriver
 
 @pytest.fixture(scope="class")
-def driver():
+def driver(request):
     capabilities = dict(  
         platformName = "Android",
         automationName = "uiautomator2",
@@ -15,6 +15,7 @@ def driver():
         command_executor="http://localhost:4723",
         options=options
     )
+    request.cls.driver = driver
 
     yield driver
     driver.quit()
