@@ -53,5 +53,7 @@ class HomePage:
         self.wait.until(expected_conditions.visibility_of_element_located(self.about_button)).is_displayed()
         self.wait.until(expected_conditions.visibility_of_element_located(self.logout_button)).is_displayed()
 
-    def click_in_daily_challenge(self):
-        self.wait.until(expected_conditions.visibility_of_element_located(self.daily_challenge)).click()
+
+
+
+

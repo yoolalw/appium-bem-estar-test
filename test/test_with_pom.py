@@ -58,3 +58,22 @@ class TestMobPom:
 
         assert verify_daily_challenge.text == 'Beba um copo de água' and verify_daily_challenge_category.text == 'Social'
 
+    def test_click_in_done_and_verifying_if_it_has_been_disabled(self):
+        login_page = LoginPage(self.driver)
+        login_page.login()
+        homepage = HomePage(self.driver)
+        homepage.click_daily_challenge_btn()
+        homepage.click_mark_done_challenge_btn()
+
+    def test_click_in_button_next_challenge(self):
+        login_page = LoginPage(self.driver)
+        login_page.login()
+        homepage = HomePage(self.driver)
+        status = self.wait.until(expected_conditions.visibility_of_element_located(
+            (
+                By.XPATH, '//android.widget.TextView[@text="Desafio 1 de 30"]'
+            )
+        ))
+        homepage.click_next_challenge_btn()
+
+        assert status.text == 'Desafio 2 de 30'
