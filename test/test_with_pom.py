@@ -73,11 +73,10 @@ class TestMobPom:
         login_page = LoginPage(self.driver)
         login_page.login()
         homepage = HomePage(self.driver)
-        status = self.wait.until(expected_conditions.visibility_of_element_located(
-            (
-                By.XPATH, '//android.widget.TextView[@text="Desafio 1 de 30"]'
-            )
-        ))
+        homepage.text_before_change()
+        homepage.click_daily_challenge_btn()
         homepage.click_next_challenge_btn()
+        homepage.status_changed()
 
-        assert status.text == 'Desafio 2 de 30'
+
+

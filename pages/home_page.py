@@ -26,6 +26,8 @@ class HomePage:
         self.logout_button = (By.XPATH,
                               '//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View[4]/android.view.View[3]')
 
+        self.status_challenges = (By.XPATH, '//android.widget.TextView[@text="Desafio 2 de 30"]')
+
     def click_daily_challenge_btn(self):
         self.wait.until(expected_conditions.visibility_of_element_located(self.daily_challenge)).click()
 
@@ -55,3 +57,9 @@ class HomePage:
 
     def buttonMarkDone(self):
         return self.wait.until(expected_conditions.visibility_of_element_located(self.mark_done_challenge))
+
+    def text_before_change(self):
+        self.wait.until(expected_conditions.visibility_of_element_located(self.challenge_text))
+
+    def status_changed(self):
+        self.wait.until(expected_conditions.visibility_of_element_located(self.status_challenges))
