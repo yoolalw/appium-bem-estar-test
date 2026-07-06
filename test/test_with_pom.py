@@ -65,6 +65,10 @@ class TestMobPom:
         homepage.click_daily_challenge_btn()
         homepage.click_mark_done_challenge_btn()
 
+        button = homepage.buttonMarkDone()
+
+        assert button.get_attribute("clickable") == 'false'
+
     def test_click_in_button_next_challenge(self):
         login_page = LoginPage(self.driver)
         login_page.login()

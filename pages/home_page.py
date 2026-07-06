@@ -53,7 +53,5 @@ class HomePage:
         self.wait.until(expected_conditions.visibility_of_element_located(self.about_button)).is_displayed()
         self.wait.until(expected_conditions.visibility_of_element_located(self.logout_button)).is_displayed()
 
-
-
-
-
+    def buttonMarkDone(self):
+        return self.wait.until(expected_conditions.visibility_of_element_located(self.mark_done_challenge))
