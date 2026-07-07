@@ -1,10 +1,14 @@
 import time
+from math import lgamma
+from os.path import exists
+
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+from pages.about_page import AboutPage
 from pages.chall_page import ChallengesDonePage
 from pages.home_page import HomePage
 
@@ -25,9 +29,7 @@ class TestMobPom:
 
         element_in_home_page = self.wait.until(expected_conditions.visibility_of_element_located((By.XPATH,
                                                                                                   '//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[1]/android.view.View/android.view.View[2]/android.view.View')))
-
         assert element_in_home_page.is_displayed()
-        return
 
     def test_login_with_invalid_auth(self):
         login_page = LoginPage(self.driver)
@@ -98,8 +100,35 @@ class TestMobPom:
         loginpage = LoginPage(self.driver)
         loginpage.login()
         homepage = HomePage(self.driver)
+
+        homepage.click_daily_challenge_btn()
+        homepage.click_mark_done_challenge_btn()
+
         homepage.click_done_challenges_page()
+
         challpage = ChallengesDonePage(self.driver)
         title = challpage.verifying_title_displayed()
-
         assert "Desafios concluídos" in title.get_attribute('text')
+
+        challenges = challpage.verifying_if_the_challenge_has_been_added()
+        assert challenges
+
+    def test_click_to_see_about_the_app(self):
+        loginpage = LoginPage(self.driver)
+        loginpage.login()
+        homepage = HomePage(self.driver)
+        homepage.click_about_button()
+        aboutpage = AboutPage(self.driver)
+
+        assert aboutpage.verifying_if_about_title_exists(), "Not founded!"
+        assert aboutpage.verifying_if_about_text_exists(), "Not founded!"
+        assert aboutpage.verifying_if_how_works_title_exists(), "Not founded!"
+        assert aboutpage.verifying_if_how_works_text_exists(), "Not founded!"
+
+    def test_click_in_logout(self):
+        loginpage = LoginPage(self.driver)
+        loginpage.login()
+        homepage = HomePage(self.driver)
+        homepage.click_logout_button()
+        loginpage.in_home_page()
+
