@@ -5,6 +5,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+from pages.chall_page import ChallengesDonePage
 from pages.home_page import HomePage
 
 from conftest import driver
@@ -93,4 +94,12 @@ class TestMobPom:
     #
     #   assert verify_daily_challenge.text == 'Envie uma mensagem positiva para alguém' and verify_daily_challenge_category.text == 'Social'
 
+    def test_click_to_see_every_challenges_marked_done(self):
+        loginpage = LoginPage(self.driver)
+        loginpage.login()
+        homepage = HomePage(self.driver)
+        homepage.click_done_challenges_page()
+        challpage = ChallengesDonePage(self.driver)
+        title = challpage.verifying_title_displayed()
 
+        assert "Desafios concluídos" in title.get_attribute('text')
