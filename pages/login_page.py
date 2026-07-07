@@ -7,16 +7,21 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 from conftest import driver
 
+
 @pytest.mark.usefixtures("driver")
 class LoginPage:
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 6)
-        self.username_input = (By.XPATH, '//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]')
-        self.password_input = (By.XPATH, '//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]')
+        self.username_input = (By.XPATH,
+                               '//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[1]')
+        self.password_input = (By.XPATH,
+                               '//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View/android.view.View/android.widget.EditText[2]')
         self.login_button = (By.XPATH, '//android.widget.Button')
-        self.logout_button = (By.XPATH, '//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View[4]/android.view.View[3]')
+        self.logout_button = (By.XPATH,
+                              '//androidx.compose.ui.platform.ComposeView/android.view.View/android.view.View/android.view.View[2]/android.view.View/android.view.View[4]/android.view.View[3]')
         self.title_login_page = (By.XPATH, '//android.widget.TextView[@text="Bem vindo de volta"]')
+        self.error_msg = (By.XPATH, '//android.widget.TextView[@text="Credenciais inválidas!"]')
 
     def enter_username(self, username):
         self.wait.until(expected_conditions.visibility_of_element_located(self.username_input)).send_keys(username)
@@ -37,3 +42,6 @@ class LoginPage:
         self.enter_username("fred")
         self.enter_password("123")
         self.click_button()
+
+    def error_message(self):
+        return self.wait.until(expected_conditions.visibility_of_element_located(self.error_msg))

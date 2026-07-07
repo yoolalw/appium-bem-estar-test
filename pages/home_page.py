@@ -46,6 +46,9 @@ class HomePage:
     def click_logout_button(self):
         self.wait.until(expected_conditions.visibility_of_element_located(self.logout_button)).click()
 
+    def item_displayed_in_home_page(self):
+        return self.wait.until(expected_conditions.visibility_of_element_located(self.daily_challenge)).is_displayed()
+
     def items_displayeds_in_home_page(self):
         self.wait.until(expected_conditions.visibility_of_element_located(self.daily_challenge)).is_displayed()
         self.wait.until(expected_conditions.visibility_of_element_located(self.mark_done_challenge)).is_displayed()
