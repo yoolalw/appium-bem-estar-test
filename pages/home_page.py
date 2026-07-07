@@ -62,4 +62,4 @@ class HomePage:
         self.wait.until(expected_conditions.visibility_of_element_located(self.challenge_text))
 
     def status_changed(self):
-        self.wait.until(expected_conditions.visibility_of_element_located(self.status_challenges))
+        return self.wait.until(expected_conditions.visibility_of_element_located(self.status_challenges))

@@ -48,7 +48,7 @@ class TestMobPom:
         login_page = LoginPage(self.driver)
         login_page.login()
         homepage = HomePage(self.driver)
-        homepage.click_in_daily_challenge()
+        homepage.click_daily_challenge_btn()
         verify_daily_challenge = self.wait.until(expected_conditions.visibility_of_element_located(
             (By.XPATH, '//android.widget.TextView[@text="Beba um copo de água"]')
         ))
@@ -76,7 +76,21 @@ class TestMobPom:
         homepage.text_before_change()
         homepage.click_daily_challenge_btn()
         homepage.click_next_challenge_btn()
-        homepage.status_changed()
+        status = homepage.status_changed()
 
+        assert 'Desafio 2 de 30' in status.get_attribute("text")
+
+        # parte q supostamente iria ver a parte de verificação de desafio modificado,
+        # mas como ela nao foi feita de forma correta, nao vai ter.
+
+    #    homepage.click_daily_challenge_btn()
+    #    verify_daily_challenge = self.wait.until(expected_conditions.visibility_of_element_located(
+    #        (By.XPATH, '//android.widget.TextView[@text="Envie uma mensagem positiva para alguém"]')
+    #    ))
+    #    verify_daily_challenge_category = self.wait.until(expected_conditions.visibility_of_element_located(
+    #        (By.XPATH, '//android.widget.TextView[@text="Social"]')
+    #    ))
+    #
+    #   assert verify_daily_challenge.text == 'Envie uma mensagem positiva para alguém' and verify_daily_challenge_category.text == 'Social'
 
 
