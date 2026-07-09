@@ -21,6 +21,7 @@ class TestMobPom:
     driver = WebDriver
     wait = WebDriverWait
 
+
     def test_login_with_valid_auth(self):
         login_page = LoginPage(self.driver)
         login_page.enter_username("fred")
@@ -50,8 +51,7 @@ class TestMobPom:
         login_page.login()
         homepage = HomePage(self.driver)
         homepage.click_daily_challenge_btn()
-        assert homepage.verifying_daily_challenge()
-        assert homepage.verifying_daily_challenge_category()
+        assert homepage.verifying_daily_challenge() and homepage.verifying_daily_challenge_category()
 
     def test_click_in_done_and_verifying_if_it_has_been_disabled(self):
         login_page = LoginPage(self.driver)
@@ -100,8 +100,7 @@ class TestMobPom:
 
         challpage = ChallengesDonePage(self.driver)
         title = challpage.verifying_title_displayed()
-        assert "Desafios concluídos" in title.get_attribute('text')
-        assert challpage.verifying_if_the_challenge_has_been_added()
+        assert "Desafios concluídos" in title.get_attribute('text') and challpage.verifying_if_the_challenge_has_been_added()
 
 
     def test_click_to_see_about_the_app(self):
@@ -121,4 +120,4 @@ class TestMobPom:
         loginpage.login()
         homepage = HomePage(self.driver)
         homepage.click_logout_button()
-        loginpage.in_home_page()
+        assert loginpage.in_home_page()
