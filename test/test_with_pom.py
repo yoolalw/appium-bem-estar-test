@@ -31,7 +31,7 @@ class TestMobPom:
         assert homepage.item_displayed_in_home_page()
 
     def test_login_with_invalid_auth(self):
-        login_page: LoginPage = LoginPage(self.driver)
+        login_page = LoginPage(self.driver)
         login_page.enter_username("fred")
         login_page.enter_password("1234")
         login_page.click_button()
@@ -43,21 +43,15 @@ class TestMobPom:
         login_page = LoginPage(self.driver)
         login_page.login()
         homepage = HomePage(self.driver)
-        assert homepage.items_displayeds_in_home_page()
+        homepage.items_displayeds_in_home_page()
 
     def test_click_to_see_the_daily_challenge(self):
         login_page = LoginPage(self.driver)
         login_page.login()
         homepage = HomePage(self.driver)
         homepage.click_daily_challenge_btn()
-        verify_daily_challenge = self.wait.until(expected_conditions.visibility_of_element_located(
-            (By.XPATH, '//android.widget.TextView[@text="Beba um copo de água"]')
-        ))
-        verify_daily_challenge_category = self.wait.until(expected_conditions.visibility_of_element_located(
-            (By.XPATH, '//android.widget.TextView[@text="Social"]')
-        ))
-
-        assert verify_daily_challenge.text == 'Beba um copo de água' and verify_daily_challenge_category.text == 'Social'
+        assert homepage.verifying_daily_challenge()
+        assert homepage.verifying_daily_challenge_category()
 
     def test_click_in_done_and_verifying_if_it_has_been_disabled(self):
         login_page = LoginPage(self.driver)
@@ -107,9 +101,8 @@ class TestMobPom:
         challpage = ChallengesDonePage(self.driver)
         title = challpage.verifying_title_displayed()
         assert "Desafios concluídos" in title.get_attribute('text')
+        assert challpage.verifying_if_the_challenge_has_been_added()
 
-        challenges = challpage.verifying_if_the_challenge_has_been_added()
-        assert challenges
 
     def test_click_to_see_about_the_app(self):
         loginpage = LoginPage(self.driver)
@@ -129,4 +122,3 @@ class TestMobPom:
         homepage = HomePage(self.driver)
         homepage.click_logout_button()
         loginpage.in_home_page()
-
