@@ -31,10 +31,12 @@ class HomePage:
         self.verify_daily_challenge_category = (By.XPATH, '//android.widget.TextView[@text="Social"]')
 
     def verifying_daily_challenge(self):
-        return self.wait.until(expected_conditions.visibility_of_element_located(self.verify_daily_challenge)).is_displayed()
+        return self.wait.until(
+            expected_conditions.visibility_of_element_located(self.verify_daily_challenge)).is_displayed()
 
     def verifying_daily_challenge_category(self):
-        return self.wait.until(expected_conditions.visibility_of_element_located(self.verify_daily_challenge_category)).is_displayed()
+        return self.wait.until(
+            expected_conditions.visibility_of_element_located(self.verify_daily_challenge_category)).is_displayed()
 
     def click_daily_challenge_btn(self):
         self.wait.until(expected_conditions.visibility_of_element_located(self.daily_challenge)).click()
@@ -42,7 +44,7 @@ class HomePage:
     def click_mark_done_challenge_btn(self):
         self.wait.until(expected_conditions.visibility_of_element_located(self.mark_done_challenge)).click()
 
-    def click_next_challenge_btn(self) :
+    def click_next_challenge_btn(self):
         self.wait.until(expected_conditions.visibility_of_element_located(self.next_challenge)).click()
 
     def click_done_challenges_page(self):
@@ -58,16 +60,17 @@ class HomePage:
         return self.wait.until(expected_conditions.visibility_of_element_located(self.daily_challenge)).is_displayed()
 
     def items_displayeds_in_home_page(self):
-        a = self.wait.until(expected_conditions.visibility_of_element_located(self.daily_challenge)).is_displayed()
-        b = self.wait.until(expected_conditions.visibility_of_element_located(self.mark_done_challenge)).is_displayed()
-        c = self.wait.until(expected_conditions.visibility_of_element_located(self.next_challenge)).is_displayed()
-        d = self.wait.until(expected_conditions.visibility_of_element_located(self.challenge_text)).is_displayed()
-        e = self.wait.until(expected_conditions.visibility_of_element_located(self.done_challenges_button)).is_displayed()
-        f = self.wait.until(expected_conditions.visibility_of_element_located(self.about_button)).is_displayed()
-        g = self.wait.until(expected_conditions.visibility_of_element_located(self.logout_button)).is_displayed()
+        return self.wait.until(
+            expected_conditions.visibility_of_element_located(self.daily_challenge)).is_displayed() and \
+            self.wait.until(
+                expected_conditions.visibility_of_element_located(self.mark_done_challenge)).is_displayed() and \
+            self.wait.until(expected_conditions.visibility_of_element_located(self.next_challenge)).is_displayed() and \
+            self.wait.until(expected_conditions.visibility_of_element_located(self.challenge_text)).is_displayed() and \
+            self.wait.until(
+                expected_conditions.visibility_of_element_located(self.done_challenges_button)).is_displayed() and \
+            self.wait.until(expected_conditions.visibility_of_element_located(self.about_button)).is_displayed() and \
+            self.wait.until(expected_conditions.visibility_of_element_located(self.logout_button)).is_displayed()
 
-
-        return a, b, c, d, e, f, g
     def buttonMarkDone(self):
         return self.wait.until(expected_conditions.visibility_of_element_located(self.mark_done_challenge))
 
